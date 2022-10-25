@@ -1,6 +1,7 @@
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import controlHelper from "../helpers/control-helper";
 import PropTypes from "prop-types";
+import React from 'react'
 
 const InputControl = ({
                           labelName = '',
@@ -8,14 +9,14 @@ const InputControl = ({
                           onChange,
                           className = '',
                           regexInput,
-                          isRequired,
+                          isRequired = false,
                           minLength,
                           maxLength,
                           isErrorEvent
                       }) => {
     const [validationMessage, setValidationMessage] = useState(undefined);
 
-    const validate = (newValue) => {
+    const validate = useCallback((newValue) => {
         if (!!isRequired && newValue.length <= 0) {
             return {
                 isSuccess: false,
@@ -48,13 +49,13 @@ const InputControl = ({
             isSuccess: true,
             message: ''
         }
-    }
+    }, [isRequired, regexInput, minLength, maxLength, labelName])
 
     useEffect(() => {
         const validationResult = validate(initialValue);
         setValidationMessage(validationResult.message);
         isErrorEvent(!validationResult.isSuccess);
-    }, []);
+    }, [initialValue, isErrorEvent, validate]);
 
     const onValueChange = (newValue) => {
         if (onChange) {
@@ -73,9 +74,6 @@ const InputControl = ({
                    value={initialValue}
                    onChange={(event) => controlHelper.onChangeInputHandler(event, onValueChange)}
                    placeholder={labelName}/>
-            {/*<div className="valid-feedback">*/}
-            {/*    Looks good!*/}
-            {/*</div>*/}
             {validationMessage && <div className="invalid-feedback">
                 {validationMessage}
             </div>}
@@ -85,6 +83,14 @@ const InputControl = ({
 
 InputControl.propTypes = {
     labelName: PropTypes.string.isRequired,
+    initialValue: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    className: PropTypes.string,
+    regexInput: PropTypes.string,
+    isRequired: PropTypes.bool,
+    minLength: PropTypes.number,
+    maxLength: PropTypes.number,
+    isErrorEvent: PropTypes.func,
 }
 
 export default InputControl;

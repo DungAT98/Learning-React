@@ -1,6 +1,7 @@
 import {useRoutes} from "react-router-dom";
 import Login from "../pages/login/login";
 import Dashboard from "../pages/dashboard/dashboard";
+import React from 'react'
 
 const AppRoutes = () => {
     return useRoutes([
