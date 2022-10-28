@@ -88,8 +88,8 @@ InputControl.propTypes = {
     className: PropTypes.string,
     regexInput: PropTypes.string,
     isRequired: PropTypes.bool,
-    minLength: PropTypes.number,
-    maxLength: PropTypes.number,
+    minLength: PropTypes.string,
+    maxLength: PropTypes.string,
     isErrorEvent: PropTypes.func,
 }
 
