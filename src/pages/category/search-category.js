@@ -4,6 +4,7 @@ import categoryService from "../../services/category.service";
 import {
   DeleteOutlined,
   EditOutlined,
+  FileAddOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
@@ -19,7 +20,7 @@ const manipulateTableParamsObject = (tableParams) => {
 };
 
 const SearchCategory = () => {
-  // const searchInput = useRef();
+  const [reloadTable, setReloadTable] = useState(false);
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
   const [tableParams, setTableParams] = useState({
@@ -52,6 +53,7 @@ const SearchCategory = () => {
       .finally(() => {
         setConfirmLoading(false);
         setIsDeleteModalOpened(false);
+        setReloadTable((prev) => !prev);
       });
   };
 
@@ -94,7 +96,7 @@ const SearchCategory = () => {
                 type="danger"
                 shape="circle"
                 icon={<DeleteOutlined />}
-                onClick={handleDelete}
+                onClick={() => handleDelete(item)}
               />
             </Tooltip>
           </Space>
@@ -103,7 +105,7 @@ const SearchCategory = () => {
     },
   ];
 
-  const onSearchFormSubmited = (data) => {
+  const onSearchFormSubmitted = (data) => {
     setTableParams({
       ...tableParams,
       pagination: {
@@ -141,6 +143,7 @@ const SearchCategory = () => {
     tableParams.pagination.pageSize,
     tableParams.searchText,
     tableParams.pagination.current,
+    reloadTable,
   ]);
 
   const handleTableChange = (pagination) => {
@@ -153,26 +156,35 @@ const SearchCategory = () => {
         <h1>List of categories</h1>
       </div>
       <Form
-        onFinish={onSearchFormSubmited}
+        onFinish={onSearchFormSubmitted}
         name="basic"
         initialValues={{ searchText: tableParams.searchText }}
       >
-        <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+        <Row gutter={{ xs: 8, sm: 16, md: 24 }}>
           <Col span={8}>
             <Form.Item label="Search" name="searchText">
               <Input />
             </Form.Item>
           </Col>
-          <Col>
-            <Form.Item>
-              <Button
-                type="primary"
-                htmlType="submit"
-                icon={<SearchOutlined />}
-              >
-                Search
-              </Button>
-            </Form.Item>
+          <Col span={4}>
+            <Space>
+              <Form.Item>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  icon={<SearchOutlined />}
+                >
+                  Search
+                </Button>
+              </Form.Item>
+              <Form.Item>
+                <Link to="add">
+                  <Button htmlType="button" icon={<FileAddOutlined />}>
+                    Add New
+                  </Button>
+                </Link>
+              </Form.Item>
+            </Space>
           </Col>
         </Row>
       </Form>

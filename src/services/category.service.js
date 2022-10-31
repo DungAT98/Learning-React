@@ -14,6 +14,9 @@ const CategoryService = {
   create: (entity) => {
     return axios.post(categoryUrl, entity);
   },
+  update: (entity) => {
+    return axios.put(categoryUrl, entity);
+  },
   delete: (id) => {
     return axios.delete(`${categoryUrl}/${id}`);
   },

@@ -2,7 +2,7 @@ import { AreaChartOutlined, BookOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import "./layout.css";
@@ -20,68 +20,69 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem("Dashboard", "/", <AreaChartOutlined/>),
-  getItem("Category", "/category", <BookOutlined/>),
+  getItem("Dashboard", "/", <AreaChartOutlined />),
+  getItem("Category", "/category", <BookOutlined />),
 ];
 
-const AuthenticatedLayout = ({children}) => {
+const AuthenticatedLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
-  const menuClickHandler = ({key}) => {
+  const menuClickHandler = ({ key }) => {
     navigate(key);
   };
   return (
-      <Layout
-          style={{
-            minHeight: "100vh",
-          }}
+    <Layout
+      style={{
+        minHeight: "100vh",
+      }}
+    >
+      <Sider
+        breakpoint="lg"
+        collapsible
+        collapsed={collapsed}
+        onCollapse={(value) => setCollapsed(value)}
       >
-        <Sider
-            breakpoint="lg"
-            collapsible
-            collapsed={collapsed}
-            onCollapse={(value) => setCollapsed(value)}
+        <div className="logo" />
+        <Menu
+          theme="dark"
+          mode="inline"
+          items={items}
+          onClick={menuClickHandler}
+        />
+      </Sider>
+      <Layout className="site-layout">
+        <Header
+          className="site-layout-background"
+          style={{
+            padding: 0,
+          }}
+        ></Header>
+        <Content
+          style={{
+            margin: "0 16px",
+          }}
         >
-          <div className="logo"/>
-          <Menu
-              theme="dark"
-              mode="inline"
-              items={items}
-              onClick={menuClickHandler}
-          />
-        </Sider>
-        <Layout className="site-layout">
-          <Header
-              className="site-layout-background"
-              style={{
-                padding: 0,
-              }}
-          ></Header>
-          <Content
-              style={{
-                margin: "0 16px",
-              }}
+          <div
+            className="site-layout-background"
+            style={{
+              padding: 24,
+              minHeight: 360,
+            }}
           >
-            <div
-                className="site-layout-background"
-                style={{
-                  padding: 24,
-                  minHeight: 360,
-                }}
-            >
-              {children}
-              <ToastContainer/>
-            </div>
-          </Content>
-          <Footer
-              style={{
-                textAlign: "center",
-              }}
-          >
-            Ant Design ©2022 Created by Ant UED
-          </Footer>
-        </Layout>
+            <Outlet />
+            {children}
+            <ToastContainer />
+          </div>
+        </Content>
+        <Footer
+          style={{
+            textAlign: "center",
+          }}
+        >
+          Ant Design ©2022 Created by Ant UED
+        </Footer>
       </Layout>
+    </Layout>
   );
 };
 
