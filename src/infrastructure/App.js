@@ -4,8 +4,11 @@ import { RouterProvider } from "react-router-dom";
 import React from "react";
 import { ClipLoader } from "react-spinners";
 import JwtInterceptor from "../interceptors/axios-interceptor";
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en.json";
 
 JwtInterceptor();
+TimeAgo.addDefaultLocale(en);
 
 function App() {
   const appRouting = AppRoutes();

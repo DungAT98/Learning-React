@@ -10,6 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import DeleteCategoryModal from "./delete-category-modal";
+import ReactTimeAgo from "react-time-ago";
 
 const manipulateTableParamsObject = (tableParams) => {
   return {
@@ -73,12 +74,26 @@ const SearchCategory = () => {
     },
     {
       title: "Created time",
-      dataIndex: "createdTime",
+      render: (item) => {
+        return (
+          item &&
+          item.createdTime && (
+            <ReactTimeAgo date={new Date(item.createdTime)} locale="en-US" />
+          )
+        );
+      },
       responsive: ["lg"],
     },
     {
       title: "Modified time",
-      dataIndex: "modifiedTime",
+      render: (item) => {
+        return (
+          item &&
+          item.modifiedTime && (
+            <ReactTimeAgo date={new Date(item.modifiedTime)} locale="en-US" />
+          )
+        );
+      },
       responsive: ["lg"],
     },
     {

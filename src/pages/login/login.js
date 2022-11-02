@@ -29,7 +29,7 @@ const Login = () => {
       .login(username, password)
       .then((res) => {
         setIncorrect(null);
-        handleLogin(res.data.token);
+        handleLogin(res.data);
         navigate("/");
       })
       .catch((err) => {
