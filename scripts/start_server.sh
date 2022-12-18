@@ -10,4 +10,5 @@ npm run build
 
 # start the application with pm2
 echo starting application...
+pm2 stop "learning-react"
 pm2 serve build 80 --name "learning-react" --spa
