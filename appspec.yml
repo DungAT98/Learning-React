@@ -6,17 +6,17 @@ files:
 hooks:
   ApplicationStop:
     - location: scripts/stop_server.sh
-      timeout: 300
+      timeout: 3000
       runas: root
   BeforeInstall:
     - location: scripts/install_dependencies.sh
-      timeout: 300
+      timeout: 30000
       runas: root
   ApplicationStart:
     - location: scripts/start_server.sh
-      timeout: 300
+      timeout: 3000
       runas: root
   ValidateService:
     - location: scripts/validate_server.sh
-      timeout: 300
+      timeout: 3000
       runas: root
