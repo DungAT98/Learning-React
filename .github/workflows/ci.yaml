@@ -3,6 +3,9 @@
 
 name: Node.js CI
 
+on:
+  workflow_dispatch:
+
 jobs:
   build:
     name: Build react app
