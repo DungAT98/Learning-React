@@ -6,6 +6,7 @@
 
 # here we update the server and install node and npm
 echo installing dependencies
+sudo su
 wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
 . ~/.nvm/nvm.sh
 nvm install 16
