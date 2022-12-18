@@ -3,7 +3,6 @@ echo starting server
 
 # here we just use npm to run the build
 cd /var/www/
-sudo su
 nvm use 16
 echo building application...
 npm run build
