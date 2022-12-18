@@ -24,6 +24,7 @@ fi
 # we need to traverse to where the application bundle is copied too.
 echo installing application with npm
 cd /var/www/
+sudo nvm use node
 sudo npm install
 
 echo installing pm2
