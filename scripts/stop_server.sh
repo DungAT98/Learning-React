@@ -4,5 +4,5 @@
 # simply stop the application process using pm2
 echo stopping server
 sudo su
-pm2 stop "learning-react"
+pm2 stop "learning-react" | exit
 exit
