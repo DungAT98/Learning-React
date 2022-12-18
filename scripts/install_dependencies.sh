@@ -6,10 +6,9 @@
 
 # here we update the server and install node and npm
 echo installing dependencies
-sudo apt-get update
-curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-sudo apt-get install nodejs -y
-sudo apt-get -y install npm
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
+. ~/.nvm/nvm.sh
+nvm install node
 
 # check to make sure the symbolic link for nodejs node exists
 echo checking for nodejs symlink
