@@ -3,17 +3,9 @@
 
 name: Node.js CI
 
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
-
 jobs:
   build:
-
+    name: Build react app
     runs-on: ubuntu-latest
 
     strategy:
