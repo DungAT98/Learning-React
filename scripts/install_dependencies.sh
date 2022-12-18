@@ -8,7 +8,7 @@
 echo installing dependencies
 wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
 . ~/.nvm/nvm.sh
-nvm install node
+nvm install 16
 
 # check to make sure the symbolic link for nodejs node exists
 echo checking for nodejs symlink
@@ -24,8 +24,8 @@ fi
 # we need to traverse to where the application bundle is copied too.
 echo installing application with npm
 cd /var/www/
-sudo nvm use node
-sudo npm install
+nvm use node
+npm install
 
 echo installing pm2
-sudo npm install pm2 -g
+npm install pm2 -g
