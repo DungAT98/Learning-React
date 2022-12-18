@@ -3,10 +3,10 @@ echo starting server
 
 # here we just use npm to run the build
 cd /var/www/
-sudo nvm use node
+nvm use 16
 echo building application...
-sudo npm run build
+npm run build
 
 # start the application with pm2
 echo starting application...
-sudo pm2 serve build 80 --name "learning-react" --spa
+pm2 serve build 80 --name "learning-react" --spa
