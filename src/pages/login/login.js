@@ -47,6 +47,7 @@ const Login = () => {
 
   return (
     <form>
+      <h1 className="row col-12">Login page</h1>
       <div className="row mb-2">
         <InputControl
           labelName="Username"
